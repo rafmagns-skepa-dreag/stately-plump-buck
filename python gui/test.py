@@ -6,13 +6,7 @@ import tkMessageBox
 import tkFont
 import sqlite3
 
-# connect to the table
-conn = sqlite3.connect('movies.db')
-# conn.commit() saves changes
-# conn.close() closes the db
-# cursor for the table
-c = conn.cursor()
-
+# just a simple message box
 def helloCallBack():
   tkMessageBox.showinfo("Testing", "YO." )
 
@@ -51,20 +45,6 @@ frame.pack()
 bottomFrame = Frame(top)
 bottomFrame.pack( side=BOTTOM )
 
-# blueB = Button( frame, bg='#ff0000', activebackground='#00ff00', text='press me!')
-# blueB.pack( side = BOTTOM)
-
-# hello = Button ( frame, bg='#B48D96', activebackground='#00ff00', text="testing", command = helloCallBack)
-# hello.pack(side=LEFT)
-
-# L1 = Label (frame, text="Username")
-# L1.pack(side=LEFT)
-
-# E1 = Entry (frame, bd=5)
-# E1.pack(side=RIGHT)
-
-
-
 columnNames = getTableNames('movies')
 
 tree = ttk.Treeview(bottomFrame, columns=columnNames, show="headings", height=20)
@@ -84,9 +64,22 @@ scrollbar_bottom.pack(side=BOTTOM, fill=X)
 tree.configure(yscrollcommand=scrollbar_right.set, xscrollcommand=scrollbar_bottom.set)
 tree.pack(side=TOP,expand=YES,fill=BOTH)
 
+# Add new movie popup
+# newEntry = Tk()
 
-newEntry = Frame()
+# newEntryFrame = Frame(newEntry)
+# newEntryFrame.pack(expand=YES, fill=BOTH)
 
-top.mainloop()
 
-conn.close()
+
+
+
+if __name__ == "main":
+  # connect to the table
+  conn = sqlite3.connect('movies.db')
+  # conn.commit() saves changes
+  # conn.close() closes the db
+  # cursor for the table
+  c = conn.cursor()
+  top.mainloop()
+  conn.close()
