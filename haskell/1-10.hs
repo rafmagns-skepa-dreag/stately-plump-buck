@@ -1,3 +1,4 @@
+import Data.List
 
 -- problem 1
 lastElem :: [a] -> a
@@ -45,6 +46,9 @@ compress x = case x of
 pack :: (Eq a) => [a] -> [[a]]
 pack [] = []
 pack (x:xs) = (x:(takeWhile (==x) xs)) : pack (dropWhile (==x) xs)
+
+--alternatively
+pack' = group
 
 --problem 10
 encode :: (Eq a) => [a] -> [(Int, a)]
