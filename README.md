@@ -1,7 +1,5 @@
 stately-plump-buck
 ==================
-*Bonus points to those who can tell me what the next three word repo name should be.*
-
 This repository contains several small projects I used to teach myself new things.
 
 Bash -- Contains a bash script for running updates on Drupal sites. May develop a more universal version later.
