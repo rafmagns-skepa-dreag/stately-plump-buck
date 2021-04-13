@@ -10,6 +10,11 @@ CUSTOM_BIN=$HOME/.bin
 PYENV_BIN=$HOME.pyenv/bin
 export PATH=$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
 
+if [ -d "$HOME/.bin/nvim-linux64" ] then
+    NVIM_HOME=$HOME/.bin/nvim-linux64/bin
+    export PATH=$NVIM_HOME:$PATH
+fi
+
 ZSH_THEME="miloshadzic"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 

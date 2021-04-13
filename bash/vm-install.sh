@@ -5,11 +5,9 @@ mkdir $HOME/.bin || echo .bin alrady exists
 mkdir -p $HOME/.config/nvim || echo .config already exists
 
 # neovim
-git clone -b v0.4.4 https://github.com/neovim/neovim.git tools/neovim
-pushd tools/neovim
-CMAKE_BUILD_TYPE=RelWithDebInfo make
-sudo make install
-popd
+wget https://github.com/neovim/neovim/releases/download/v0.4.4/nvim-linux64.tar.gz
+tar -zxf nvim-linux64.tar.gz
+mv nvim-linux64 $HOME/.bin/
 
 # exa
 curl -O exa.zip https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip
