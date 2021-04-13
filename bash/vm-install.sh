@@ -10,27 +10,30 @@ tar -zxf nvim-linux64.tar.gz
 mv nvim-linux64 $HOME/.bin/
 
 # exa
-curl -o exa.zip https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip
-unzip exa.zip
-mv exa $HOME/.bin/
+wget -O exa.zip https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip
+unzip exa.zip -d exa
+mv exa/bin/exa $HOME/.bin/
 
 # starship
 curl -fsSL https://starship.rs/install.sh | bash
 
 # du-dust
-curl -o dust.tar.gz dust-v0.5.4-x86_64-unknown-linux-gnu.tar.gz
-tar -zxf dust.tar.gz
-mv dust $HOME/.bin
+wget -O dust.tar.gz https://github.com/bootandy/dust/releases/download/v0.5.4/dust-v0.5.4-x86_64-unknown-linux-gnu.tar.gz
+mkdir dust
+tar -zxf dust.tar.gz --strip-components=1 -C dust
+mv dust/dust $HOME/.bin
 
 # bat
-curl -o bat.tar.gz https://github.com/sharkdp/bat/releases/download/v0.18.0/bat-v0.18.0-x86_64-unknown-linux-gnu.tar.gz
-tar -zxf bat.tar.gz
-mv bat $HOME/.bin
+wget -O bat.tar.gz https://github.com/sharkdp/bat/releases/download/v0.18.0/bat-v0.18.0-x86_64-unknown-linux-gnu.tar.gz
+mkdir bat
+tar -zxf bat.tar.gz --strip-components=1 -C bat
+mv bat/bat $HOME/.bin
 
 # fd
-curl -o fd.tar.gz https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-gnu.tar.gz
-tar -zxf fd.tar.gz
-mv fd $HOME/.bin
+wget -O fd.tar.gz https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-gnu.tar.gz
+mkdir fd
+tar -zxf fd.tar.gz --strip-components=1 -C fd
+mv fd/fd $HOME/.bin
 
 # rust
 curl https://sh.rustup.rs -sSf | sh
@@ -66,3 +69,4 @@ mv $HOME/bootstrap/bash/tmux.conf $HOME/.tmux.conf
 mv $HOME/bootstrap/bash/zshrc $HOME/.zshrc
 
 rm -rf $HOME/bootstrap
+rm -rf dust* exa* bat* fd*
