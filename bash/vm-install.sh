@@ -10,32 +10,32 @@ tar -zxf nvim-linux64.tar.gz
 mv nvim-linux64 $HOME/.bin/
 
 # exa
-curl -O exa.zip https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip
+curl -o exa.zip https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip
 unzip exa.zip
 mv exa $HOME/.bin/
-
-# rust
-curl https://sh.rustup.rs -sSf | sh
-export PATH=$HOME/.cargo/bin:$PATH
-cargo install ripgrep python-launcher gitui
 
 # starship
 curl -fsSL https://starship.rs/install.sh | bash
 
 # du-dust
-curl -O dust.tar.gz dust-v0.5.4-x86_64-unknown-linux-gnu.tar.gz
+curl -o dust.tar.gz dust-v0.5.4-x86_64-unknown-linux-gnu.tar.gz
 tar -zxf dust.tar.gz
 mv dust $HOME/.bin
 
 # bat
-curl -O bat.tar.gz https://github.com/sharkdp/bat/releases/download/v0.18.0/bat-v0.18.0-x86_64-unknown-linux-gnu.tar.gz
+curl -o bat.tar.gz https://github.com/sharkdp/bat/releases/download/v0.18.0/bat-v0.18.0-x86_64-unknown-linux-gnu.tar.gz
 tar -zxf bat.tar.gz
 mv bat $HOME/.bin
 
 # fd
-curl -O fd.tar.gz https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-gnu.tar.gz
+curl -o fd.tar.gz https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-gnu.tar.gz
 tar -zxf fd.tar.gz
 mv fd $HOME/.bin
+
+# rust
+curl https://sh.rustup.rs -sSf | sh
+export PATH=$HOME/.cargo/bin:$PATH
+cargo install ripgrep python-launcher gitui
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
