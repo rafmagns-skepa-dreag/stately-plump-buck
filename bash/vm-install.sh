@@ -15,7 +15,7 @@ curl -fsSL https://starship.rs/install.sh | bash
 # rust
 curl https://sh.rustup.rs -sSf | sh
 export PATH=$HOME/.cargo/bin:$PATH
-cargo install ripgrep python-launcher gitui exa
+cargo install ripgrep python-launcher gitui exa git-delta
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
@@ -47,6 +47,10 @@ mv $HOME/bootstrap/bash/zshrc $HOME/.zshrc
 
 rm -rf $HOME/bootstrap
 rm -rf dust* bat* fd*
+
+git config --global core.pager delta
+git config --global user.name $GIT_USER
+git config --global user.email $GIT_EMAIL
 
 # mkdir -p $HOME/.local/share/fonts
 # cd $HOME/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
