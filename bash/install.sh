@@ -49,6 +49,8 @@ git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 # curl init.vim, starship.toml, .tmux.conf, .ripgreprc
 git clone https://github.com/rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
 mv $HOME/bootstrap/bash/init.vim $HOME/.config/nvim/
+mv $HOME/bootstrap/bash/plugins.lua $HOME/.config/nvim/
+mv $HOME/bootstrap/bash/lua $HOME/.config/nvim/
 mv $HOME/bootstrap/bash/python_history.py $HOME/.pythonrc
 mv $HOME/bootstrap/bash/ripgreprc $HOME/.ripgreprc
 mv $HOME/bootstrap/bash/starship.toml $HOME/.config/starship.toml
