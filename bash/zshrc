@@ -7,10 +7,14 @@ export ZSH=/home/$USER/.oh-my-zsh
 CARGO_BIN=$HOME/.cargo/bin
 POETRY=$HOME/.poetry/bin
 CUSTOM_BIN=$HOME/.bin
-PYENV_BIN=$HOME.pyenv/bin
-export PATH=$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
+PYENV_BIN=$HOME/.pyenv/bin
+NVIM_BIN=$HOME/.bin/nvim-linux64/bin
+TOOLS=$HOME/tools
+CODE=$HOME/VSCode-linux-x64/bin
+$TOOLS_BIN=$HOME/remote-home/tools/bin
+export PATH=$TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
 
-if [ -d "$HOME/.bin/nvim-linux64" ] then
+if [ -d "$NVIM_BIN" ] then
     NVIM_HOME=$HOME/.bin/nvim-linux64/bin
     export PATH=$NVIM_HOME:$PATH
 fi
@@ -26,7 +30,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
   git
   common-aliases
-  tmux
   ripgrep
   cargo
   rust
@@ -66,5 +69,12 @@ alias find=fd
 eval "$(starship init zsh)"
 
 source /opt/rh/rh-git218/enable
+source /opt/rh/rh-postgresql10/enable
+
+if [ -n "$PYTHONPATH" ]; then
+    export PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582':$PYTHONPATH
+else
+    PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582'
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
