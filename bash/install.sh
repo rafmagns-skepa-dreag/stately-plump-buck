@@ -22,7 +22,7 @@ popd
 # rust
 curl https://sh.rustup.rs -sSf | sh
 export PATH=$HOME/.cargo/bin:$PATH
-cargo install ripgrep exa python-launcher starship bat fd-find gitui
+cargo install ripgrep exa python-launcher starship bat fd-find gitui git-delta
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
@@ -48,11 +48,11 @@ git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 # curl init.vim, starship.toml, .tmux.conf, .ripgreprc
 git clone https://github.com/rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
-mv $HOME/bootstrap/bash/init.vim $HOME/.config/nvim/
-mv $HOME/bootstrap/bash/plugins.lua $HOME/.config/nvim/
-mv $HOME/bootstrap/bash/lua $HOME/.config/nvim/
-mv $HOME/bootstrap/bash/python_history.py $HOME/.pythonrc
-mv $HOME/bootstrap/bash/ripgreprc $HOME/.ripgreprc
-mv $HOME/bootstrap/bash/starship.toml $HOME/.config/starship.toml
-mv $HOME/bootstrap/bash/tmux.conf $HOME/.tmux.conf
-mv $HOME/bootstrap/bash/zshrc $HOME/.zshrc
+ln -s $HOME/bootstrap/bash/init.vim $HOME/.config/nvim/
+ln -s $HOME/bootstrap/bash/plugins.lua $HOME/.config/nvim/
+ln -s $HOME/bootstrap/bash/lua $HOME/.config/nvim/
+ln -s $HOME/bootstrap/bash/python_history.py $HOME/.pythonrc
+ln -s $HOME/bootstrap/bash/ripgreprc $HOME/.ripgreprc
+ln -s $HOME/bootstrap/bash/starship.toml $HOME/.config/starship.toml
+ln -s $HOME/bootstrap/bash/tmux.conf $HOME/.tmux.conf
+ln -s $HOME/bootstrap/bash/zshrc $HOME/.zshrc
