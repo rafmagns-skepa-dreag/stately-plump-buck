@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=/home/$USER/.oh-my-zsh
 
@@ -11,22 +8,16 @@ PYENV_BIN=$HOME/.pyenv/bin
 NVIM_BIN=$HOME/.bin/nvim-linux64/bin
 TOOLS=$HOME/tools
 CODE=$HOME/VSCode-linux-x64/bin
-$TOOLS_BIN=$HOME/remote-home/tools/bin
-export PATH=$TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
-
-if [ -d "$NVIM_BIN" ] then
-    NVIM_HOME=$HOME/.bin/nvim-linux64/bin
-    export PATH=$NVIM_HOME:$PATH
-fi
+TOOLS_BIN=$HOME/remote-home/tools/bin
+export PATH=$TOOLS_BIN:$NVIM_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
+export TERMINFO=/usr/share/terminfo
+export LD_LIBRARY_PATH=$HOME/remote-home/tools/lib:$LD_LIBRARY_PATH
 
 ZSH_THEME="miloshadzic"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
   common-aliases
@@ -34,7 +25,7 @@ plugins=(
   cargo
   rust
   rustup
-  pyenv
+  # pyenv
   fzf
   fd
   wd
@@ -59,7 +50,7 @@ alias pcr="pre-commit run"
 alias ls="exa"
 alias la="ls -alh"
 alias rga="rg -A 1"
-alias git-clean="git branch -v | rg -v '\*' | rg \"\\[gone\\]\" | awk '{print $1; }' | xargs -r git branch -D"
+alias git-clean="git branch -vv | rg -v '\*' | awk '/: gone]/{print $1}' | xargs -r git branch -D"
 alias cat=bat
 alias find=fd
 
