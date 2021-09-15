@@ -50,7 +50,7 @@ alias pcr="pre-commit run"
 alias ls="exa"
 alias la="ls -alh"
 alias rga="rg -A 1"
-alias git-clean="git branch -vv | rg -v '\*' | awk '/: gone]/{print $1}' | xargs -r git branch -D"
+alias git-clean="git fetch -p && git branch -vv | rg -v '\*' | awk '/: gone]/{print $1}' | xargs -r git branch -D"
 alias cat=bat
 alias find=fd
 
