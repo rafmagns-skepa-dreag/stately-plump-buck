@@ -42,6 +42,8 @@ export LANG=en_US.UTF-8
 export EDITOR=nvim
 export PYTHONSTARTUP=~/.pythonrc
 export POETRY_VIRTUALENVS_IN_PROJECT=true
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_THEME="gruvbox-dark"
 
 unalias fd 2>/dev/null
 alias vi=/usr/bin/vim
