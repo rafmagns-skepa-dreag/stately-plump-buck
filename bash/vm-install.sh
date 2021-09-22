@@ -47,6 +47,8 @@ mv $HOME/bootstrap/bash/starship.toml $HOME/.config/starship.toml
 mv $HOME/bootstrap/bash/tmux.conf $HOME/.tmux.conf
 mv $HOME/bootstrap/bash/zshrc $HOME/.zshrc
 
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
 rm -rf $HOME/bootstrap
 rm -rf dust* bat* fd*
 
