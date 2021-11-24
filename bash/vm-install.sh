@@ -5,7 +5,7 @@ mkdir $HOME/.bin || echo .bin alrady exists
 mkdir -p $HOME/.config/nvim || echo .config already exists
 
 # neovim
-wget https://github.com/neovim/neovim/releases/download/v0.4.4/nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/v0.5.1/nvim-linux64.tar.gz
 tar -zxf nvim-linux64.tar.gz
 mv nvim-linux64 $HOME/.bin/
 
