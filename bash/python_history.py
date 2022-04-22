@@ -11,3 +11,5 @@ except IOError:
   print('Failed to initialize python history')
 
   del os, readline, atexit
+
+from pprint import pprint
