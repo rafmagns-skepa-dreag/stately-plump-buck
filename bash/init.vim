@@ -73,44 +73,6 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra message when using completion
 set shortmess+=c
 
-let g:completion_enable_auto_popup = 0
+"let g:completion_enable_auto_popup = 0
 imap <tab> <Plug>(completion_smart_tab)
 imap <s-tab> <Plug>(completion_smart_s_tab)
-
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <silent> <leader>rn    <cmd>lua vim.lsp.buf.rename()<CR>
-
-nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
-
-
-"let g:LanguageClient_serverCommands = {
-"    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"    \ 'python': [expand('~/.vscode/extensions/ms-python.python-*/languageServer.*/Microsoft.Python.LanguageServer')],
-"    \ }
-
-" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-"function SetLSPShortcuts()
-"  nnoremap <Leader>d :call LanguageClient#textDocument_definition()<CR>
-"  nnoremap <Leader>r :call LanguageClient#textDocument_rename()<CR>
-"  nnoremap <Leader>f :call LanguageClient#textDocument_formatting()<CR>
-"  nnoremap <Leader>t :call LanguageClient#textDocument_typeDefinition()<CR>
-"  nnoremap <Leader>u :call LanguageClient#textDocument_references()<CR>
-"  nnoremap <Leader>ae :call LanguageClient_workspace_applyEdit()<CR>
-"  nnoremap <Leader>c :call LanguageClient#textDocument_completion()<CR>
-"  nnoremap <Leader>v :call LanguageClient#textDocument_hover()<CR>
-"  nnoremap <Leader>s :call LanguageClient_textDocument_documentSymbol()<CR>
-"  nnoremap <Leader>m :call LanguageClient_contextMenu()<CR>
-"endfunction()
-"
-"augroup LSP
-"  autocmd!
-"  autocmd FileType python,rust,tf call SetLSPShortcuts()
-"augroup END

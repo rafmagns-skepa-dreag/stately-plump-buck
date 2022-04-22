@@ -13,7 +13,7 @@ popd
 export PATH=$HOME/.bin:$PATH
 
 # neovim
-git clone -b v0.5.0 https://github.com/neovim/neovim.git tools/neovim
+git clone -b v0.7.0 https://github.com/neovim/neovim.git tools/neovim
 pushd tools/neovim
 CMAKE_BUILD_TYPE=RelWithDebInfo make
 sudo make install

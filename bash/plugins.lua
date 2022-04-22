@@ -14,12 +14,15 @@ return require('packer').startup(function()
   use 'morhetz/gruvbox'
   use 'martinda/Jenkinsfile-vim-syntax'
   use 'junegunn/fzf'
-  use 'neovim/nvim-lspconfig'
-  use 'kabouzeid/nvim-lspinstall'
+  use {'neovim/nvim-lspconfig', branch='feat/0_7_goodies'}
+  use 'williamboman/nvim-lsp-installer'
   use 'iamcco/markdown-preview.nvim'
   use 'kosayoda/nvim-lightbulb'
-  use 'nvim-lua/completion-nvim'
-    
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'saadparwaiz1/cmp_luasnip'
+  use 'L3MON4D3/LuaSnip'
+
   if packer_bootstrap then
     require('packer').sync()
   end
