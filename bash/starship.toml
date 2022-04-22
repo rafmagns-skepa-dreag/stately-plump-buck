@@ -50,3 +50,9 @@ $character"""
 
 [character]
 error_symbol = "[✗](bold red) "
+
+[memory_usage]
+disabled = false
+
+[status]
+disabled = false
