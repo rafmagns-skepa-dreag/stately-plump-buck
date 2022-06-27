@@ -5,6 +5,14 @@ local util = require'lspconfig/util'
 local path = util.path
 vim.lsp.set_log_level("debug")
 
+local format_disabled_var = function()
+    return string.format("format_disabled_%s", vim.bo.filetype)
+end
+
+local format_options_var = function()
+    return string.format("format_options_%s", vim.bo.filetype)
+end
+
 local servers = {
     "pyright",
     "sumneko_lua"
