@@ -13,10 +13,10 @@ popd
 export PATH=$HOME/.bin:$PATH
 
 # neovim
-git clone -b v0.7.0 https://github.com/neovim/neovim.git tools/neovim
-pushd tools/neovim
-CMAKE_BUILD_TYPE=RelWithDebInfo make
-sudo make install
+pushd $HOME/tools
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+tar zxvf nvim-linux64.tar.gz
+ln -s $HOME/tools/nvim-linu64/bin/nvim $HOME/.bin/nvim
 popd
 
 # rust

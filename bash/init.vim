@@ -6,6 +6,7 @@ luafile ~/.config/nvim/lua/lspconfig_completion.lua
 
 " Plug 'janko-m/vim-test'
 
+set mouse=
 set termguicolors
 tnoremap <Esc> <C-\><C-n>
 inoremap ;; <Esc>
