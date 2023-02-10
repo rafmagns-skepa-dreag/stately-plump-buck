@@ -15,7 +15,7 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set number
-set shiftwidth=0
+" set shiftwidth=0
 set noautoindent
 let mapleader=";"
 nnoremap <silent> <leader>n :set number! number?<CR>
@@ -73,6 +73,24 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra message when using completion
 set shortmess+=c
 
-"let g:completion_enable_auto_popup = 0
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
+let g:completion_enable_auto_popup = 0
+imap <leader><tab> <Plug>(completion_smart_tab)
+imap <leader><s-tab> <Plug>(completion_smart_s_tab)
+
+autocmd Filetype python set tabstop=2
+autocmd Filetype python set softtabstop=2
+autocmd Filetype python set shiftwidth=2
+
+let g:python_recommended_style=0
+
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>rn    <cmd>lua vim.lsp.buf.rename()<CR>
+
+nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
