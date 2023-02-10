@@ -1,18 +1,21 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/$USER/.oh-my-zsh
 export TERM=xterm-256color
+export TMPDIR=/home/rhanson/tmp
 # source pg10 before adding pg13 to the path
 source /opt/rh/rh-postgresql10/enable
+source /opt/rh/rh-git218/enable
 
 CARGO_BIN=$HOME/.cargo/bin
 POETRY=$HOME/.poetry/bin
 CUSTOM_BIN=$HOME/.bin
 PYENV_BIN=$HOME/.pyenv/bin
-TOOLS=$HOME/tools
+TOOLS_BIN=$HOME/tools/bin
 CODE=$HOME/VSCode-linux-x64/bin
-TOOLS_BIN=$HOME/remote-home/tools/bin
+REMOTE_TOOLS_BIN=$HOME/remote-home/tools/bin
 PG13_BIN=/usr/pgsql-13/bin
-export PATH=$PG13_BIN:$TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
+#export PATH=$PG13_BIN:$CODE:$PYENV_BIN:$POETRY:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
+export PATH=$PG13_BIN:$TOOLS_BIN:$REMOTE_TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
 export TERMINFO=/usr/share/terminfo
 export LD_LIBRARY_PATH=$PG13_BIN/../lib:$HOME/remote-home/tools/lib:$LD_LIBRARY_PATH
 
@@ -22,6 +25,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
+  bazel
   git
   common-aliases
   ripgrep
@@ -53,16 +57,18 @@ alias pcr="pre-commit run"
 alias ls="exa"
 alias la="ls -alh"
 alias rga="rg -A 1"
-alias git-clean="git fetch -p && git branch -vv | rg -v '\*' | awk '/: gone]/{print $1}' | xargs -r git branch -D"
+#alias git="git branchless wrap"
+alias git-clean="git fetch -p && git branch -vv | rg -v '(\*|\+)' | awk '/: gone]/{print \$1}' | xargs -r git branch -D"
 alias cat=bat
 alias find=fd
+alias z=zenith
 
 # pyenv should be loaded by oh-my-zsh
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 eval "$(starship init zsh)"
 
-source /opt/rh/rh-git218/enable
+# source /opt/rh/rh-git218/enable
 
 if [ -n "$PYTHONPATH" ]; then
     export PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582':$PYTHONPATH
@@ -76,3 +82,24 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 nvm use --lts
+
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+
+function find_files() {
+        rg -ic $1 | sed 's/:[1-9]\+$//g' | xargs exa -lFhs modified
+}
+
+function refdb-p() {
+        curl -X 'POST' 'https://ny5-p-refdb-v00.omc.oldmissioncapital.com/v1/query' -H 'accept: application/json' -H 'Content-Type: application/json' -d "{\"security_type\": \"BOND\",\"where\": {\"join_keyword\": \"OR\",\"items\": [{\"cusip\": [\"$1\"]}]}}" | jq '.data'
+}
+
+function refdb() {
+        curl -X 'POST' "https://ny5-$1-refdb-v00.omc.oldmissioncapital.com/v1/query" -H 'accept: application/json' -H 'Content-Type: application/json' -d "{\"security_type\": \"BOND\",\"where\": {\"join_keyword\": \"OR\",\"items\": [{\"cusip\": [\"$2\"]}]}}" | jq '.data'
+}
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
