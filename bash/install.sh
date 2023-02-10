@@ -35,9 +35,9 @@ curl https://pyenv.run | bash
 export PATH=$HOME/.pyenv/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-pyenv install 3.8.8 &
-pyenv install 3.9.2 &
-pyenv global 3.8.8
+pyenv install 3.10.10 &
+pyenv install 3.8.16 &
+pyenv global 3.8.16
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
@@ -47,7 +47,9 @@ $HOME/.fzf/install --completion --no-update-rc --key-bindings
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 # curl init.vim, starship.toml, .tmux.conf, .ripgreprc
-git clone https://github.com/rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
+# git clone https://github.com/rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
+git clone git@github.com:rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
+
 ln -s $HOME/bootstrap/bash/init.vim $HOME/.config/nvim/
 ln -s $HOME/bootstrap/bash/plugins.lua $HOME/.config/nvim/
 ln -s $HOME/bootstrap/bash/lua $HOME/.config/nvim/
