@@ -120,6 +120,9 @@ local servers = {
                 },
         },
         ruff_lsp = {},
+        --sqlls = {
+        --        settings = {},
+        --}
 }
 
 
@@ -186,16 +189,18 @@ local nls = require("null-ls")
 nls.setup({
         sources = {
                 nls.builtins.diagnostics.ruff.with { extra_args = { "--config", "tech/refdb/pyproject.toml" } },
-                nls.builtins.diagnostics.sqlfluff.with { extra_args = { "--dialect", "postgres", "--config", "/home/rhanson/bootstrap/bash/sqlfluff.cfg" }, timeout = 50000, },
+                nls.builtins.diagnostics.yamllint.with { extra_args = { "--config-file", ".yamllint" } },
+                --nls.builtins.diagnostics.sqlfluff.with { extra_args = { "--dialect", "postgres", "--config", "/home/rhanson/bootstrap/bash/sqlfluff.cfg" }, timeout = 50000, },
                 --nls.builtins.diagnostics.jsonlint,
                 --nls.builtins.diagnostics.luacheck,
                 --nls.builtins.diagnostics.mypy,
                 nls.builtins.formatting.stylua,
-                nls.builtins.formatting.sql_formatter.with { extra_args = { "--language", "postgresql" } },
+                nls.builtins.formatting.sql_formatter.with { extra_args = { "--language", "postgresql" }, },
                 nls.builtins.formatting.yapf.with { args = { "--style", "tech/jenkins/style.yapf" }, timeout = 50000, },
                 nls.builtins.formatting.buildifier,
                 nls.builtins.formatting.isort,
                 nls.builtins.formatting.jq,
+                nls.builtins.formatting.yamlfmt.with { extra_args = { "--conf", "$HOME/.config/.yamlfmt" }, },
                 --nls.builtins.formatting.black,
                 --nls.builtins.formatting.pg_format,
                 --nls.builtins.formatting.sqlfluff.with { extra_args = { "--dialect", "postgres", "--config", "/home/rhanson/bootstrap/bash/sqlfluff.cfg" }, timeout = 50000, },
