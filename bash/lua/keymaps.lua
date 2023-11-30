@@ -1,11 +1,10 @@
 local keymap = vim.keymap.set
 
-
 keymap("t", "<Esc>", "<C-\\><C-n>")
 -- in terminal, escape then quit
 keymap("t", "<C-x>", "<C-\\><C-n><C-w>q")
 
-keymap("i", ";;", "<Esc>")
+-- keymap("i", ";;", "<Esc>")
 
 keymap("n", "<Leader>n", ":set number! number? <CR>")
 keymap("n", "<Leader>j", "<C-w><C-j>")
@@ -34,7 +33,6 @@ keymap("n", "<Leader>bl", ":ls<CR>")
 -- list and select buffer
 keymap("n", "<Leader>bg", ":ls<CR>:buffer<Space>")
 
-
 -- Use tab/shift-tab to navigate through popup menu
 keymap("i", "<Tab>", "pumvisible() ? '<C-n>': '<Tab>'", { expr = true })
 keymap("i", "<S-Tab>", "pumvisible() ? '<C-p>': '<S-Tab>'", { expr = true })
@@ -42,7 +40,6 @@ keymap("i", "<S-Tab>", "pumvisible() ? '<C-p>': '<S-Tab>'", { expr = true })
 -- Completion
 keymap("i", "<Leader><Tab>", "<Plug>(completion_smart_tab)")
 keymap("i", "<Leader><S-Tab>", "<Plug>(compltion_smart_s_tab)")
-
 
 -- LSP
 keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
@@ -56,13 +53,12 @@ keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 keymap("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 keymap("x", "<Leader>a", "<cmd>lua vim.slp.buf.range_code_action()<CR>")
 
-
 -- better indent
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 
-local builtin = require('telescope.builtin')
-keymap('n', '<leader>ff', builtin.find_files, {})
-keymap('n', '<leader>fg', builtin.live_grep, {})
-keymap('n', '<leader>fb', builtin.buffers, {})
-keymap('n', '<leader>fh', builtin.help_tags, {})
+local builtin = require("telescope.builtin")
+keymap("n", "<leader>ff", builtin.find_files, {})
+keymap("n", "<leader>fg", builtin.live_grep, {})
+keymap("n", "<leader>fb", builtin.buffers, {})
+keymap("n", "<leader>fh", builtin.help_tags, {})

@@ -10,22 +10,24 @@ wget https://github.com/Kitware/CMake/releases/download/v3.20.0/cmake-3.20.0-lin
 tar -zxvf cmake-3.20.0-linux-x86_64.tar.gz
 pushd $HOME/.bin
 ln -s $HOME/tools/cmake-3.20*/bin/* $HOME/.bin/
+wget https://github.com/eza-community/eza/releases/download/v0.14.0/eza_x86_64-unknown-linux-gnu.tar.gz
+tar -zxvf eza_x86_64-unknown-linux-gnu.tar.gz
+rm -rf eza_x86_64-unknown-linux-gnu.tar.gz
 popd
 popd
 export PATH=$HOME/.bin:$PATH
 
 # neovim
-git clone -b 0.9.0 git@github.com:neovim/neovim $HOME/tools/neovim
-pushd $HOME/tools/neovim
-CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/tools make
-
+pushd $HOME/tools
+wget https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-linux64.tar.gz
+tar -zxvf nvim-linux64.tar.gz
 ln -s $HOME/tools/nvim-linu64/bin/nvim $HOME/.bin/nvim
 popd
 
 # rust
 curl https://sh.rustup.rs -sSf | sh
 export PATH=$HOME/.cargo/bin:$PATH
-cargo install ripgrep exa python-launcher starship bat fd-find gitui git-delta bore sd du-dust hyperfine zenith
+cargo install ripgrep python-launcher starship bat fd-find gitui git-delta bore sd du-dust hyperfine zenith
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
@@ -38,9 +40,8 @@ curl https://pyenv.run | bash
 export PATH=$HOME/.pyenv/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-pyenv install 3.10.10 &
+pyenv install 3.12.1 &
 pyenv install 3.8.16 &
-pyenv global 3.8.16
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
