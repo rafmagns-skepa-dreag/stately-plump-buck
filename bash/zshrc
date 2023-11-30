@@ -1,10 +1,10 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/$USER/.oh-my-zsh
+
 export TERM=xterm-256color
 export TMPDIR=/home/rhanson/tmp
-# source pg10 before adding pg13 to the path
-source /opt/rh/rh-postgresql10/enable
-source /opt/rh/rh-git218/enable
+export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
+export FPATH="~/.eza/completions/zsh:$FPATH"
 
 CARGO_BIN=$HOME/.cargo/bin
 POETRY=$HOME/.poetry/bin
@@ -12,12 +12,16 @@ CUSTOM_BIN=$HOME/.bin
 PYENV_BIN=$HOME/.pyenv/bin
 TOOLS_BIN=$HOME/tools/bin
 CODE=$HOME/VSCode-linux-x64/bin
-REMOTE_TOOLS_BIN=$HOME/remote-home/tools/bin
-PG13_BIN=/usr/pgsql-13/bin
-#export PATH=$PG13_BIN:$CODE:$PYENV_BIN:$POETRY:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
-export PATH=$PG13_BIN:$TOOLS_BIN:$REMOTE_TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
+#REMOTE_TOOLS_BIN=$HOME/remote-home/tools/bin
+PG15_BIN=/usr/pgsql-15/bin
+PG_FORMAT_BIN=$HOME/tools/usr/bin
+#export PATH=$PG15_BIN:$CODE:$PYENV_BIN:$POETRY:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
+export PATH=$PG15_BIN:$PG_FORMAT_BIN:$TOOLS_BIN:$REMOTE_TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
 export TERMINFO=/usr/share/terminfo
-export LD_LIBRARY_PATH=$PG13_BIN/../lib:$HOME/remote-home/tools/lib:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$PG15_BIN/../lib:$HOME/remote-home/tools/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$PG15_BIN/../lib:$LD_LIBRARY_PATH
+export PERL5LIB=/home/rhanson/tools/usr/share/perl5/vendor_perl
+
 
 ZSH_THEME="miloshadzic"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -48,13 +52,14 @@ export EDITOR=nvim
 export PYTHONSTARTUP=~/.pythonrc
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c" # required to make MANPAGER work correctly
 export BAT_THEME="gruvbox-dark"
 
 unalias fd 2>/dev/null
 alias vi=/usr/bin/vim
 alias vim=nvim
 alias pcr="pre-commit run"
-alias ls="exa"
+alias ls="eza"
 alias la="ls -alh"
 alias rga="rg -A 1"
 #alias git="git branchless wrap"
@@ -89,7 +94,7 @@ bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 
 function find_files() {
-        rg -ic $1 | sed 's/:[1-9]\+$//g' | xargs exa -lFhs modified
+        rg -ic $1 | sed 's/:[1-9]\+$//g' | xargs eza -lFhs modified
 }
 
 function refdb-p() {
@@ -99,6 +104,7 @@ function refdb-p() {
 function refdb() {
         curl -X 'POST' "https://ny5-$1-refdb-v00.omc.oldmissioncapital.com/v1/query" -H 'accept: application/json' -H 'Content-Type: application/json' -d "{\"security_type\": \"BOND\",\"where\": {\"join_keyword\": \"OR\",\"items\": [{\"cusip\": [\"$2\"]}]}}" | jq '.data'
 }
+export PERL5LIB=/home/rhanson/tools/usr/share/perl5/vendor_perl
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
