@@ -10,7 +10,7 @@ wget https://github.com/Kitware/CMake/releases/download/v3.20.0/cmake-3.20.0-lin
 tar -zxvf cmake-3.20.0-linux-x86_64.tar.gz
 pushd $HOME/.bin
 ln -s $HOME/tools/cmake-3.20*/bin/* $HOME/.bin/
-wget https://github.com/eza-community/eza/releases/download/v0.14.0/eza_x86_64-unknown-linux-gnu.tar.gz
+wget https://github.com/eza-community/eza/releases/download/v0.20.21/eza_x86_64-unknown-linux-gnu.tar.gz
 tar -zxvf eza_x86_64-unknown-linux-gnu.tar.gz
 rm -rf eza_x86_64-unknown-linux-gnu.tar.gz
 popd
@@ -19,9 +19,9 @@ export PATH=$HOME/.bin:$PATH
 
 # neovim
 pushd $HOME/tools
-wget https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-linux64.tar.gz
-tar -zxvf nvim-linux64.tar.gz
-ln -s $HOME/tools/nvim-linu64/bin/nvim $HOME/.bin/nvim
+wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz
+tar -zxvf nvim-linux-x86_64.tar.gz
+ln -s $HOME/tools/nvim-linu-x86_64/bin/nvim $HOME/.bin/nvim
 popd
 
 # rust
