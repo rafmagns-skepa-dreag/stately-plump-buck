@@ -41,16 +41,17 @@ export PATH=$HOME/.pyenv/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 pyenv install 3.12.1 &
-pyenv install 3.8.16 &
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 $HOME/.fzf/install --completion --no-update-rc --key-bindings
 
 # yazi
+pushd $HOME/tools
 wget https://github.com/sxyazi/yazi/releases/download/v0.2.1/yazi-x86_64-unknown-linux-gnu.zip
 unzip yazi-x86_64-unknown-linux-gnu.zip
 mv yazi-x86_64-unknown-linux-gnu/yazi ~/.bin/
+popd
 
 # font
 mkdir $HOME/.local/share/fonts || echo font dir already exists
