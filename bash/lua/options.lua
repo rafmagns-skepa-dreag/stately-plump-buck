@@ -18,7 +18,7 @@ vim.g.completion_enable_auto_popup = 0
 vim.g.mapleader = ";"
 vim.g.python_recommended_style = 0
 vim.g.loaded_python_provider = 0
-vim.g.python3_host_prog = "/opt/rh/rh-python38/root/bin/python3"
+vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.gruvbox_material_foreground = "mix"
 
 vim.o.foldcolumn = "1" -- '0' is not bad
