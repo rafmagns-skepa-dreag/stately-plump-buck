@@ -21,7 +21,7 @@ export PATH=$HOME/.bin:$PATH
 pushd $HOME/tools
 wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz
 tar -zxvf nvim-linux-x86_64.tar.gz
-ln -s $HOME/tools/nvim-linu-x86_64/bin/nvim $HOME/.bin/nvim
+ln -s $HOME/tools/nvim-linux-x86_64/bin/nvim $HOME/.bin/nvim
 popd
 
 # rust
