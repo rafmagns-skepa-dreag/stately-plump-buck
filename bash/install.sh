@@ -69,8 +69,7 @@ git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 # git clone https://github.com/rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
 git clone git@github.com:rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
 
-ln -s $HOME/bootstrap/bash/init.vim $HOME/.config/nvim/
-ln -s $HOME/bootstrap/bash/plugins.lua $HOME/.config/nvim/
+ln -s $HOME/bootstrap/bash/init.lua $HOME/.config/nvim/
 ln -s $HOME/bootstrap/bash/lua $HOME/.config/nvim/
 ln -s $HOME/bootstrap/bash/python_history.py $HOME/.pythonrc
 ln -s $HOME/bootstrap/bash/ripgreprc $HOME/.ripgreprc
