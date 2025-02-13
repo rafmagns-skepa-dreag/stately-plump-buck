@@ -15,15 +15,17 @@ CODE=$HOME/VSCode-linux-x64/bin
 #REMOTE_TOOLS_BIN=$HOME/remote-home/tools/bin
 PG15_BIN=/usr/pgsql-15/bin
 PG_FORMAT_BIN=$HOME/tools/usr/bin
+GO_GO_BIN=$HOME/.go_install/bin
+GO_BIN=$HOME/go/bin
 #export PATH=$PG15_BIN:$CODE:$PYENV_BIN:$POETRY:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
-export PATH=$PG15_BIN:$PG_FORMAT_BIN:$TOOLS_BIN:$REMOTE_TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
+export PATH=$PG15_BIN:$GO_BIN:$GO_GO_BIN:$PG_FORMAT_BIN:$TOOLS_BIN:$REMOTE_TOOLS_BIN:$CODE:$CARGO_BIN:$PYENV_BIN:$POETRY:$CUSTOM_BIN:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$PATH
 export TERMINFO=/usr/share/terminfo
 #export LD_LIBRARY_PATH=$PG15_BIN/../lib:$HOME/remote-home/tools/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$PG15_BIN/../lib:$LD_LIBRARY_PATH
 export PERL5LIB=/home/rhanson/tools/usr/share/perl5/vendor_perl
 
 
-ZSH_THEME="miloshadzic"
+# ZSH_THEME="miloshadzic"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Standard plugins can be found in $ZSH/plugins/
@@ -32,15 +34,16 @@ plugins=(
   bazel
   git
   common-aliases
-  ripgrep
   rust
-  # pyenv
   fzf
-  fd
   wd
   redis-cli
   docker
   docker-compose
+  pip
+  poetry
+  starship
+  eza
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -59,29 +62,21 @@ unalias fd 2>/dev/null
 alias vi=/usr/bin/vim
 alias vim=nvim
 alias pcr="pre-commit run"
-alias ls="eza"
-alias la="ls -alh"
 alias rga="rg -A 1"
 #alias git="git branchless wrap"
 alias git-clean="git fetch -p && git branch -vv | rg -v '(\*|\+)' | awk '/: gone]/{print \$1}' | xargs -r git branch -D"
 alias cat=bat
 alias find=fd
 alias z=zenith
+alias pipx="/usr/bin/python $HOME/.bin/pipx.pyz"
 
-# pyenv should be loaded by oh-my-zsh
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-eval "$(starship init zsh)"
+# if [ -n "$PYTHONPATH" ]; then
+#     export PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582':$PYTHONPATH
+# else
+#     PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582'
+# fi
 
-# source /opt/rh/rh-git218/enable
-
-if [ -n "$PYTHONPATH" ]; then
-    export PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582':$PYTHONPATH
-else
-    PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582'
-fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -109,3 +104,12 @@ export PERL5LIB=/home/rhanson/tools/usr/share/perl5/vendor_perl
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+eval "$(atuin init zsh)"
+
+env_on_chdir () {
+    export PYTHONPATH=$(git rev-parse --show-toplevel)
+}
+
+# add env_on_chdir to chpwd_functions
+add-zsh-hook chpwd env_on_chdir
