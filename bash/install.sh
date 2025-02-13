@@ -47,6 +47,20 @@ pyenv install 3.8.16 &
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 $HOME/.fzf/install --completion --no-update-rc --key-bindings
 
+# yazi
+wget https://github.com/sxyazi/yazi/releases/download/v0.2.1/yazi-x86_64-unknown-linux-gnu.zip
+unzip yazi-x86_64-unknown-linux-gnu.zip
+mv yazi-x86_64-unknown-linux-gnu/yazi ~/.bin/
+
+# font
+mkdir $HOME/.local/share/fonts || echo font dir already exists
+pushd $HOME/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/RobotoMono.tar.xz
+tar --xz -xf RobotoMono.tar.xz
+rm RobotoMono.tar.xz
+fc-cache $HOME/.local/share/fonts
+popd
+
 # tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
