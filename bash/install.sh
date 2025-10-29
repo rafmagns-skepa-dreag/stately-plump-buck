@@ -21,13 +21,15 @@ export PATH=$HOME/.bin:$PATH
 pushd $HOME/tools
 wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz
 tar -zxvf nvim-linux-x86_64.tar.gz
-ln -s $HOME/tools/nvim-linux-x86_64/bin/nvim $HOME/.bin/nvim
+ln -s $HOME/tools/nvim-linu-x86_64/bin/nvim $HOME/.bin/nvim
 popd
 
 # rust
 curl https://sh.rustup.rs -sSf | sh
 export PATH=$HOME/.cargo/bin:$PATH
-cargo install ripgrep python-launcher starship bat fd-find gitui git-delta bore sd du-dust hyperfine zenith
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+
+cargo binstall python-launcher starship bat fd-find gitui git-delta bore sd du-dust hyperfine zenith xh atuin procs zellij
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
@@ -69,10 +71,9 @@ git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 # git clone https://github.com/rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
 git clone git@github.com:rafmagns-skepa-dreag/stately-plump-buck $HOME/bootstrap
 
-ln -s $HOME/bootstrap/bash/init.lua $HOME/.config/nvim/
-ln -s $HOME/bootstrap/bash/lua $HOME/.config/nvim/
 ln -s $HOME/bootstrap/bash/python_history.py $HOME/.pythonrc
 ln -s $HOME/bootstrap/bash/ripgreprc $HOME/.ripgreprc
 ln -s $HOME/bootstrap/bash/starship.toml $HOME/.config/starship.toml
 ln -s $HOME/bootstrap/bash/tmux.conf $HOME/.tmux.conf
 ln -s $HOME/bootstrap/bash/zshrc $HOME/.zshrc
+ln -s $HOME/bootstrap/bash/nvim $HOME/.config/nvim
