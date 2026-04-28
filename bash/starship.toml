@@ -1,58 +1,626 @@
-add_newline=false
+"$schema" = 'https://starship.rs/config-schema.json'
+
+scan_timeout = 35
+command_timeout = 700
+
+
 format = """
+[\
+$sudo\
+$os\
 $username\
 $hostname\
-$shlvl\
-$kubernetes\
-$directory\
-$git_branch\
+](color_orange)\
+\
+[$directory\
+](bg:color_yellow fg:color_orange)\
+\
+[$git_branch\
 $git_commit\
 $git_state\
-$docker_context\
-$package\
-$cmake\
-$dart\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$golang\
-$helm\
-$java\
-$julia\
-$nim\
-$nodejs\
-$ocaml\
-$purescript\
-$python\
-$ruby\
+](fg:color_yellow bg:color_aqua)\
+\
+[$all\
+$c\
+$cpp\
 $rust\
-$swift\
-$terraform\
-$zig\
-$nix_shell\
-$conda\
+$golang\
+$nodejs\
+$php\
+$java\
+$python\
 $memory_usage\
-$aws\
-$gcloud\
-$openstack\
 $env_var\
-$crystal\
-$custom\
 $cmd_duration\
-$line_break\
-$lua\
-$jobs\
-$battery\
+](fg:color_aqua bg:color_blue)\
+\
+[](fg:color_blue)\
+$fill\
+[\
 $time\
+$localip\
+](fg:color_bg1)\
+[](fg:color_bg1)\
+$line_break\
+$jobs\
 $status\
-$character"""
+$character
+"""
+
+continuation_prompt = '[▶▶](bright-white) '
+
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+
+claude = "#D97757"
+claude_bg = "#282828"
+
+git_branch = "#b16286"
+git_status = "#d3869b"
+git_bg = "#3c3836"
+
+model = "#458588"
+model_bg = "#282828"
+
+context = "#d79921"
+context_bg = "#3c3836"
+
+cost = "#689d6a"
+cost_bg = "#504945"
+
+
+[os]
+disabled = false
+style = "bg:color_orange fg:color_fg0"
+
+[username]
+show_always = false
+style_user = "bg:color_orange fg:color_fg0"
+style_root = "bg:color_orange fg:color_fg0"
+format = "[ $user ]($style)"
+
+[directory]
+style = "fg:color_fg0 bg:color_yellow"
+format = "[ $path ]($style)[$read_only]($read_only_style)"
+truncation_length = 3
+read_only = " \U000f033e"
+
+[git_branch]
+symbol = "\uf418 "
+style = "bg:color_aqua"
+format = "[[ $symbol$branch ](fg:color_fg0 bg:color_aqua)]($style)"
+
+[git_status]
+disabled = true
+style = "bg:color_aqua"
+format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)"
+
+[git_commit]
+tag_symbol = " \uf412 "
+
+[c]
+disabled = true
+symbol = "\ue61e "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[cpp]
+symbol = "\ue61d "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[golang]
+symbol = "\ue627 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[haskell]
+disabled = true
+symbol = "\ue777 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[java]
+symbol = "\ue738 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[kotlin]
+disabled = true
+symbol = "\ue634 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[nodejs]
+symbol = "\ue718 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[php]
+disabled = true
+symbol = "\ue608 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[python]
+symbol = "\ue235 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[rust]
+symbol = "\U000f1617 "
+style = "bg:color_blue"
+format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)"
+
+[docker_context]
+symbol = "\uf308 "
+style = "bg:color_bg3"
+format = "[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)"
+
+[conda]
+disabled = true
+symbol = "\ue715 "
+style = "bg:color_bg3"
+format = "[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)"
+
+[pixi]
+disabled = true
+symbol = "\U000f03d7 "
+style = "bg:color_bg3"
+format = "[[ $symbol($version)( $environment) ](fg:color_fg0 bg:color_bg3)]($style)"
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:color_bg1"
+format = "[[  $time ](fg:color_fg0 bg:color_bg1)]($style)"
+
+[localip]
+disabled = false
+ssh_only = false
+format = "[@$localipv4](fg:color_fg0 bg:color_bg1)"
+
+[line_break]
+disabled = false
 
 [character]
-error_symbol = "[✗](bold red) "
+disabled = false
+success_symbol = "[❯](bold fg:color_green)"
+error_symbol = "[✗](bold fg:color_red)"
+vimcmd_symbol = "[V](bold fg:color_green)"
+vimcmd_replace_one_symbol = "[V](bold fg:color_purple)"
+vimcmd_replace_symbol = "[V](bold fg:color_purple)"
+vimcmd_visual_symbol = "[V](bold fg:color_yellow)"
+
+[aws]
+disabled = true
+symbol = "\uf0ef "
+
+[azure]
+disabled = true
+symbol = "\ue754 "
+
+[battery]
+disabled = true
+full_symbol = "\U000f0079 "
+charging_symbol = "\U000f0084 "
+discharging_symbol = "\U000f0083 "
+unknown_symbol = "\U000f0091 "
+empty_symbol = "\U000f008e "
+
+[buf]
+symbol = "\uf49d "
+format = "(with [$symbol($version )]($style))"
+
+[bun]
+disabled = true
+symbol = "\ue76f "
+format = "(via [$symbol($version )]($style))"
+
+[cmake]
+symbol = "\ue794 "
+format = "(via [$symbol($version )]($style))"
+
+[cmd_duration]
+style = "bg:color_blue"
+format = '[took $duration]($style) '
+
+[cobol]
+disabled = true
+symbol = "\uf013 "
+format = "(via [$symbol($version )]($style))"
+
+[container]
+symbol = "\uf4b7 "
+
+[crystal]
+disabled = true
+symbol = "\ue62f "
+format = "(via [$symbol($version )]($style))"
+
+[daml]
+disabled = true
+format = "(via [$symbol($version )]($style))"
+
+[dart]
+disabled = true
+symbol = "\ue64c "
+format = "(via [$symbol($version )]($style))"
+
+[deno]
+disabled = true
+symbol = "\ue7c0 "
+format = "(via [$symbol($version )]($style))"
+
+[direnv]
+symbol = "\ue613 "
+
+[dotnet]
+disabled = true
+symbol = "\ue77f "
+format = "(via [$symbol($version )(🎯 $tfm )]($style))"
+
+[elixir]
+disabled = true
+symbol = "\ue62d "
+format = "(via [$symbol($version \\(OTP $otp_version\\) )]($style))"
+
+[elm]
+disabled = true
+symbol = "\ue62c "
+format = "(via [$symbol($version )]($style))"
+
+[erlang]
+disabled = true
+symbol = "\uf23f "
+format = "(via [$symbol($version )]($style))"
+
+[fennel]
+disabled = true
+symbol = "\ue6af "
+format = "(via [$symbol($version )]($style))"
+
+[fortran]
+disabled = true
+symbol = "\ue7de "
+format = "(via [$symbol($version )]($style))"
+
+[fossil_branch]
+symbol = "\uf418 "
+
+[gcloud]
+symbol = "\U000f11f6 "
+
+[gleam]
+symbol = "\uf005 "
+format = "(via [$symbol($version )]($style))"
+
+[gradle]
+disabled = true
+symbol = "\ue660 "
+
+[guix_shell]
+disabled = true
+symbol = "\uf325 "
+
+[haxe]
+disabled = true
+symbol = "\ue666 "
+
+[helm]
+disabled = true
+symbol = "\ue7fb "
+format = "(via [$symbol($version )]($style))"
+
+[hg_branch]
+disabled = true
+symbol = "\uf418 "
+
+[hostname]
+ssh_only = false
+ssh_symbol = "\ueb01 "
+format = "[$ssh_symbol $hostname ](bg:color_orange fg:color_fg0)"
+
+[julia]
+disabled = true
+symbol = "\ue624 "
+format = "(via [$symbol($version )]($style))"
+
+[kubernetes]
+symbol = "\U000f10fe "
+
+[lua]
+symbol = "\ue620 "
+format = "(via [$symbol($version )]($style))"
+
+[maven]
+disabled = true
+symbol = "\ue674 "
 
 [memory_usage]
 disabled = false
+symbol = "\U000f035b "
+format = '[via $symbol ${ram}( | ${swap})]($style) '
+style = "bg:color_blue"
+
+[meson]
+disabled = true
+symbol = "\U000f0537 "
+
+[mojo]
+disabled = true
+symbol = "\U000f0238 "
+
+[nats]
+disabled = true
+symbol = "\uf0e0 "
+
+[netns]
+disabled = true
+symbol = "\U000f06f3 "
+
+[nim]
+disabled = true
+symbol = "\ue677 "
+format = "(via [$symbol($version )]($style))"
+
+[nix_shell]
+disabled = true
+symbol = "\uf313 "
+
+[ocaml]
+disabled = true
+symbol = "\ue67a "
+format = "(via [$symbol($version )(\\($switch_indicator$switch_name\\) )]($style))"
+
+[odin]
+disabled = true
+symbol = "\U000f07e2 "
+
+[opa]
+disabled = true
+symbol = "\uf132 "
+format = "(via [$symbol($version )]($style))"
+
+[openstack]
+disabled = true
+symbol = "\ue856 "
+
+[package]
+disabled = true
+symbol = "\U000f03d7 "
+format = "([is $symbol$version]($style) )"
+style = "bg:color_blue"
+
+[perl]
+disabled = true
+symbol = "\ue67e "
+format = "(via [$symbol($version )]($style))"
+
+[pijul_channel]
+disabled = true
+symbol = "\uf418 "
+
+[pulumi]
+disabled = true
+symbol = "\ue873 "
+
+[purescript]
+disabled = true
+symbol = "\ue630 "
+format = "(via [$symbol($version )]($style))"
+
+[quarto]
+disabled = true
+format = "(via [$symbol($version )]($style))"
+
+[raku]
+disabled = true
+symbol = "\U000f158a "
+format = "(via [$symbol($version-$vm_version )]($style))"
+
+[red]
+symbol = "\U000f137c "
+format = "(via [$symbol($version )]($style))"
+
+[rlang]
+disabled = true
+symbol = "\U000f07d4 "
+format = "(via [$symbol($version )]($style))"
+
+[ruby]
+disabled = true
+symbol = "\ue791 "
+format = "(via [$symbol($version )]($style))"
+
+[scala]
+disabled = true
+symbol = "\ue737 "
+format = "(via [$symbol($version )]($style))"
+
+[shlvl]
+symbol = "\U000f0e4d "
+
+[singularity]
+disabled = true
+symbol = "\uf4b7 "
+
+[solidity]
+disabled = true
+symbol = "\ue8a6 "
+
+[spack]
+disabled = true
+symbol = "\ue8aa "
 
 [status]
 disabled = false
+symbol = "\uf467 "
+
+[sudo]
+disabled = false
+symbol = "\uef01 "
+
+[swift]
+disabled = true
+symbol = "\ue755 "
+format = "(via [$symbol($version )]($style))"
+
+[terraform]
+symbol = "\ue69a "
+
+[typst]
+disabled = true
+symbol = "\uf37f "
+format = "(via [$symbol($version )]($style))"
+
+[vagrant]
+disabled = true
+symbol = "\ue8d0 "
+format = "(via [$symbol($version )]($style))"
+
+[vcs]
+disabled = true
+
+[vlang]
+disabled = true
+symbol = "\ue6ac "
+format = "(via [$symbol($version )]($style))"
+
+[xmake]
+disabled = true
+symbol = "\ue794 "
+format = "(via [$symbol($version )]($style))"
+
+[zig]
+disabled = true
+symbol = "\ue6a9 "
+format = "(via [$symbol($version )]($style))"
+
+
+[os.symbols]
+AIX = " "
+AlmaLinux = " "
+Alpaquita = " "
+Alpine = " "
+ALTLinux = " "
+Amazon = " "
+Android = " "
+AOSC = " "
+Arch = " "
+Artix = " "
+Bluefin = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Elementary = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = " "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = " "
+InstantOS = " "
+Ios = "󰀷 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = " "
+OpenCloudOS = " "
+openEuler = " "
+openSUSE = " "
+OracleLinux = "󰺡 "
+PikaOS = " "
+Pop = " "
+Raspbian = " "
+Redhat = "󱄛 "
+RedHatEnterprise = "󱄛 "
+Redox = "󰀘 "
+RockyLinux = " "
+Solus = " "
+SUSE = " "
+Ubuntu = " "
+Ultramarine = " "
+Unknown = " "
+Uos = " "
+Void = " "
+Windows = "󰍲 "
+Zorin = " "
+
+[directory.substitutions]
+Documents = "\U000f0219 "
+Downloads = " "
+Music = "\U000f075a "
+Pictures = " "
+Developer = "\U000f0c8b "
+
+[claude_model]
+format = "[$symbol$model]($style) "
+symbol = "🤖 "
+style = "bold blue"
+
+[claude_context]
+format = "[$gauge $percentage]($style) "
+gauge_width = 10
+
+[claude_cost]
+format = "[$symbol$cost]($style) "
+symbol = "💰 "
+
+[profiles]
+claude-code = """
+[](color_yellow)\
+[$directory\
+](bg:color_yellow fg:color_orange)\
+[\
+$git_branch\
+$git_commit\
+$git_state\
+](fg:color_yellow bg:color_aqua)\
+\
+[   \
+${env_var.CLAUDE_MODEL_NERD} \
+${env_var.CLAUDE_CONTEXT} \
+${env_var.CLAUDE_COST}\
+](fg:color_fg0 bg:color_blue)\
+[](color_blue)
+"""
+
+[env_var.CLAUDE_MODEL_NERD]
+variable = "CLAUDE_MODEL_NERD"
+format = "[$env_value]($style)"
+style = "bg:color_blue fg:color_fg0"
+
+[env_var.CLAUDE_CONTEXT]
+variable = "CLAUDE_CONTEXT"
+format = "[$gauge $env_value]($style)"
+style = "bg:color_blue fg:color_fg0"
+gauge_width = 10
+
+
+[env_var.CLAUDE_COST]
+variable = "CLAUDE_COST"
+format = "[💰$env_value]($style)"
+style = "bg:color_blue fg:color_fg0"
