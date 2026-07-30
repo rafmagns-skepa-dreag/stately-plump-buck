@@ -57,6 +57,7 @@ export POETRY_VIRTUALENVS_IN_PROJECT=true
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c" # required to make MANPAGER work correctly
 export BAT_THEME="gruvbox-dark"
+export ANSIBLE_COLOR_VERBOSE="bright blue"
 
 unalias fd 2>/dev/null
 alias vi=/usr/bin/vim
@@ -69,6 +70,9 @@ alias cat=bat
 alias find=fd
 alias z=zenith
 alias pipx="/usr/bin/python $HOME/.bin/pipx.pyz"
+alias sched2psql='psql '\''postgresql://scheduler2@pri-p-db-01.omc.oldmissioncapital.com:5432/scheduler'\'''
+alias ps=procs
+alias wget=xh
 
 # if [ -n "$PYTHONPATH" ]; then
 #     export PYTHONPATH='/home/rhanson/.local/share/pdm/venv/lib64/python3.8/site-packages/pdm/pep582':$PYTHONPATH
@@ -113,3 +117,5 @@ env_on_chdir () {
 
 # add env_on_chdir to chpwd_functions
 add-zsh-hook chpwd env_on_chdir
+
+# eval "$(zellij setup --generate-auto-start zsh)"
