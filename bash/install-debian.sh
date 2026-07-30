@@ -64,7 +64,7 @@ which gh || sudo mkdir -p -m 755 /etc/apt/keyrings &&
 # neovim
 echo -e "${BREAK}Installing neovim...${BREAK}"
 pushd $HOME/tools
-wget https://github.com/neovim/neovim/releases/download/v0.12.2/nvim-linux-x86_64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz
 rm -rf nvim-linux-x86_64
 rm -rf $HOME/.bin/nvim
 tar -zxf nvim-linux-x86_64.tar.gz
@@ -81,10 +81,10 @@ cargo binstall \
   atuin \
   bat \
   bore \
+  bottom \
   du-dust \
   fd-find \
   git-delta \
-  gitui \
   hyperfine \
   python-launcher \
   resvg \
@@ -92,6 +92,7 @@ cargo binstall \
   starship \
   yazi-fm \
   zenith \
+  zellij \
   zoxide \
   --no-confirm
 
@@ -169,4 +170,4 @@ if [[ -L "$HOME/.config/starship.toml" ]]; then
 fi
 ln -s $HOME/bootstrap/bash/starship.toml $HOME/.config/starship.toml
 # ln -s $HOME/bootstrap/bash/tmux.conf $HOME/.tmux.conf
-# ln -s $HOME/bootstrap/bash/zshrc $HOME/.zshrc
+ln -s $HOME/bootstrap/bash/zshrc $HOME/.zshrc
