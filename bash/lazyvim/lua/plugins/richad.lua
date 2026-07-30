@@ -207,7 +207,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        ruff = { init_options = { settings = { args = { "--config", "tech/refdb/pyproject.toml" } } } },
+        ruff = {},
         -- pyright = {},
         -- pyrefly = {},
         ty = {},
