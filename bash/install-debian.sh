@@ -95,8 +95,10 @@ cargo binstall \
   zoxide \
   --no-confirm
 
+cargo binstall --git https://github.com/googleworkspace/cli google-workspace-cli
+
 # oh-my-zsh
-# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 
 # install uv and python
 echo -e "${BREAK}Installing uv and python...${BREAK}"
@@ -116,6 +118,13 @@ tar --xz -xf RobotoMono.tar.xz
 rm RobotoMono.tar.xz
 fc-cache $HOME/.local/share/fonts
 popd
+
+# configure delta
+git config --global core.pager delta
+git config --global interactive.diffFilter 'delta --color-only'
+git config --global delta.navigate true
+git config --global delta.dark true # or `delta.light true`, or omit for auto-detection
+git config --global merge.conflictStyle zdiff3
 
 # tmux plugin manager
 # git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
