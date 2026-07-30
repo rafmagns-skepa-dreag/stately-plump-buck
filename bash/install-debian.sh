@@ -7,15 +7,11 @@ HOME=/home/rhanson
 
 echo -e "${BREAK}Creating directories...${BREAK}"
 mkdir $HOME/tools || echo tools already exists
-mkdir $HOME/.bin || echo .bin alrady exists
-mkdir -p $HOME/.config/nvim || echo .config already exists
 mkdir $HOME/Downloads || echo Downloads already exists
 
 CARGO_BIN=$HOME/.cargo/bin
-CUSTOM_BIN=$HOME/.bin
-TOOLS_BIN=$HOME/tools/bin
 LOCAL_BIN=$HOME/.local/bin
-export PATH=$CUSTOM_BIN:$TOOLS_BIN:$CARGO_BIN:$LOCAL_BIN:$PATH
+export PATH=$CARGO_BIN:$LOCAL_BIN:$PATH
 
 echo -e "${BREAK}Setting up ssh vars...${BREAK}"
 eval $(ssh-agent)
@@ -66,9 +62,9 @@ echo -e "${BREAK}Installing neovim...${BREAK}"
 pushd $HOME/tools
 wget https://github.com/neovim/neovim/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz
 rm -rf nvim-linux-x86_64
-rm -rf $HOME/.bin/nvim
+rm -rf $HOME/.local/bin/nvim
 tar -zxf nvim-linux-x86_64.tar.gz
-ln -s $HOME/tools/nvim-linux-x86_64/bin/nvim $HOME/.bin/nvim
+ln -s $HOME/tools/nvim-linux-x86_64/bin/nvim $HOME/.local/bin/nvim
 popd
 
 # rust
@@ -99,7 +95,7 @@ cargo binstall \
 cargo binstall --git https://github.com/googleworkspace/cli google-workspace-cli
 
 # oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
+# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 
 # install uv and python
 echo -e "${BREAK}Installing uv and python...${BREAK}"
@@ -160,7 +156,6 @@ echo $HOME
 
 # ln -s $HOME/bootstrap/bash/init.lua $HOME/.config/nvim/
 # ln -s $HOME/bootstrap/bash/lua $HOME/.config/nvim/
-# ln -s $HOME/bootstrap/bash/python_history.py $HOME/.pythonrc
 if [[ -L "$HOME/.ripgreprc" ]]; then
   rm $HOME/.ripgreprc
 fi
@@ -170,4 +165,10 @@ if [[ -L "$HOME/.config/starship.toml" ]]; then
 fi
 ln -s $HOME/bootstrap/bash/starship.toml $HOME/.config/starship.toml
 # ln -s $HOME/bootstrap/bash/tmux.conf $HOME/.tmux.conf
-ln -s $HOME/bootstrap/bash/zshrc $HOME/.zshrc
+# ln -s $HOME/bootstrap/bash/zshrc $HOME/.zshrc
+if [[ -L "$HOME/config/nvim" ]]; then
+  mv $HOME/.config/nvim $HOME/.config/nvim.bak
+fi
+ln -s $HOME/bootstrap/bash/lazyvim $HOME/.config/nvim
+mkdir -p $HOME/.config/fish
+ln -s $HOME/bootstrap/bash/config.fish $HOME/.config/fish/config.fish
